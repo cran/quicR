@@ -13,21 +13,20 @@
 #'
 #' @examples
 #' file <- system.file(
-#' "extdata/input_files",
-#' file = "test.xlsx",
-#' package = "quicR"
+#'   "extdata/input_files",
+#'   file = "test.xlsx",
+#'   package = "quicR"
 #' )
 #' get_meta(file)
-#'
 #'
 #' @export
 get_meta <- function(file) {
   if (is.character(file)) { # Read the Excel file into R.
-    data <- read_excel(file, sheet = 2, col_names = FALSE)
+    data <- read_excel(file, sheet = 1, col_names = FALSE)
   } else if (is.data.frame(file)) {
     data <- file
   } else {
-    return("Please enter either .xlsx string or dataframe. ")
+    stop("Please enter either .xlsx string or dataframe. ")
   }
   for (i in 1:nrow(data[, 1])) {
     if (is.na(data[i, 1])) {
@@ -39,7 +38,7 @@ get_meta <- function(file) {
     na.omit() |>
     separate_wider_delim(
       1,
-      ":",
+      ": ",
       names = c("Meta_ID", "Meta_info"),
       too_few = "align_start",
       too_many = "merge"

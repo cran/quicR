@@ -4,6 +4,7 @@
 #' and converts them into dataframe columns.
 #'
 #' @param tab A table/matrix or a list of tables/matrices.
+#' @param na_omit Logical; if true, will remove rows with NA.
 #'
 #' @return A dataframe column.
 #'
@@ -12,16 +13,15 @@
 #'
 #' @examples
 #' file <- system.file(
-#' "extdata/input_files",
-#' file = "test.xlsx",
-#' package = "quicR"
+#'   "extdata/input_files",
+#'   file = "test.xlsx",
+#'   package = "quicR"
 #' )
 #' tabs <- organize_tables(file)
 #' convert_tables(tabs)
 #'
-#'
 #' @export
-convert_tables <- function(tab) {
+convert_tables <- function(tab, na_omit = TRUE) {
   df_list <- data.frame()
   if (is.vector(tab)) {
     for (i in 1:length(tab)) {
@@ -35,6 +35,7 @@ convert_tables <- function(tab) {
     }
     df_ <- as.data.frame(df_list)
     colnames(df_) <- names(tab)
+    if (na_omit) df_ <- na.omit(df_)
     return(df_)
   }
 }

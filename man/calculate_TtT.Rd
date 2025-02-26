@@ -4,7 +4,7 @@
 \alias{calculate_TtT}
 \title{Calculate Time to Threshold}
 \usage{
-calculate_TtT(data, threshold, start_col = 3, run_time = 48)
+calculate_TtT(data, threshold, start_col = 3)
 }
 \arguments{
 \item{data}{A dataframe containing real-time RT-QuIC data.}
@@ -12,8 +12,6 @@ calculate_TtT(data, threshold, start_col = 3, run_time = 48)
 \item{threshold}{A numeric value defining the threshold.}
 
 \item{start_col}{The column containing the starting position of the real-time data.}
-
-\item{run_time}{The time in hours that the assay ran.}
 }
 \value{
 A vector containing the times to threshold
@@ -25,14 +23,14 @@ Calculates the time required to reach a defined threshold.
 # This test takes >5 sec
 \donttest{
 file <- system.file(
-"extdata/input_files",
-file = "test.xlsx",
-package = "quicR"
+  "extdata/input_files",
+  file = "test2.xlsx",
+  package = "quicR"
 )
 df_ <- get_real(file)[[1]] |>
-  normalize_RFU()
+  quicR::transpose_real() |>
+  quicR::normalize_RFU(transposed = TRUE)
 calculate_TtT(df_, threshold = 2)
 }
-
 
 }

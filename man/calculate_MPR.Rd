@@ -4,7 +4,7 @@
 \alias{calculate_MPR}
 \title{Calculate the Maxpoint Ratio}
 \usage{
-calculate_MPR(data, start_col = 3, data_is_norm = FALSE)
+calculate_MPR(data, start_col = 3, data_is_norm = TRUE)
 }
 \arguments{
 \item{data}{A dataframe containing the real-time fluorescence data.}
@@ -23,13 +23,13 @@ background fluorescence.
 \examples{
 # This test takes >5 sec
 \donttest{
-  file <- system.file(
-    "extdata/input_files",
-    file = "test.xlsx",
-    package = "quicR"
-    )
-  df_ <- quicR::get_real(file)[[1]]
-  print(calculate_MPR(df_))
+file <- system.file(
+  "extdata/input_files",
+  file = "test.xlsx",
+  package = "quicR"
+)
+df_ <- quicR::get_real(file)[[1]]
+print(calculate_MPR(df_))
 }
 
 }

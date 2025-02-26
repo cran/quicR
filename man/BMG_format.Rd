@@ -6,7 +6,7 @@
 \usage{
 BMG_format(
   file,
-  save_path = "./",
+  save_path = "",
   save_name = "formatted.txt",
   write_file = FALSE
 )
@@ -32,8 +32,7 @@ layout_file <- system.file(
   "extdata/BMG_formatting",
   file = "plate_layout.csv",
   package = "quicR"
-  )
+)
 BMG_format(layout_file)
-
 
 }
